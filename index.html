@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="A special question asked from the heart 💕 Will you go on a date with me?" />
+    <meta name="theme-color" content="#FFF0F5" />
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="A Special Question for You 💌 | Will You Go On A Date With Me?" />
+    <meta property="og:description" content="A special question asked from the heart 💕 Open this cute proposal!" />
+    
+    <title>A Special Question for You 💌 | Will You Go On A Date With Me?</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    
+    <!-- Google Fonts: Playfair Display, Outfit, Dancing Script, Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+    
+    <!-- Modular External Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Canvas Confetti Library (for heart bursts & celebration fireworks) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  </head>
+  <body>
+    <div class="date-simulator-app">
+      <!-- Dreamy Ambient Floating Hearts & Glowing Orbs -->
+      <div class="dreamy-background-container" id="dreamyBackground" aria-hidden="true">
+        <div class="ambient-glow orb-1"></div>
+        <div class="ambient-glow orb-2"></div>
+        <div class="ambient-glow orb-3"></div>
+        <div class="ambient-glow orb-4"></div>
+        <div class="floating-hearts-layer" id="floatingHeartsLayer"></div>
+        <div class="ambient-twinkles-layer" id="ambientTwinklesLayer"></div>
+      </div>
+
+      <!-- Interactive Cursor/Tap Sparkle Trail Container -->
+      <div class="sparkle-trail-container" id="sparkleTrailContainer" aria-hidden="true"></div>
+
+      <!-- Top Action Floating Controls Bar -->
+      <header class="floating-top-bar" role="banner">
+        <!-- Sound & Melody Toggle -->
+        <button
+          type="button"
+          id="soundToggleBtn"
+          class="icon-pill-btn sound-toggle-btn sound-active"
+          title="Toggle Cute Background Melody & Sound"
+          aria-label="Toggle background music"
+        >
+          <svg class="sound-icon-playing" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <span id="soundToggleText" class="pill-text">Sound: ON 🎵</span>
+        </button>
+
+        <!-- Personalize Name Button -->
+        <button
+          type="button"
+          id="personalizeBtn"
+          class="icon-pill-btn"
+          title="Personalize Name 💗"
+          aria-label="Customize recipient name"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span id="personalizePillText" class="pill-text">For: Pretty Girl</span>
+        </button>
+
+        <!-- Share Personalized Link Button -->
+        <button
+          type="button"
+          id="shareLinkBtn"
+          class="icon-pill-btn link-btn"
+          title="Copy personalized link to share"
+          aria-label="Copy personalized link"
+        >
+          <svg id="shareLinkIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          <span id="shareLinkText" class="pill-text">Share Link</span>
+        </button>
+      </header>
+
+      <!-- Main Stage Viewport -->
+      <main class="main-content-viewport" id="mainStage" role="main">
+        <!-- ==========================================
+             SCREEN 1: THE ROMANTIC QUESTION CARD
+             ========================================== -->
+        <section class="card-outer-wrapper" id="questionCardWrapper" aria-labelledby="romanticQuestionHeading">
+          <article class="romantic-card main-question-card" id="questionCard">
+            <!-- Decorative Corner Emojis -->
+            <span class="card-deco-heart top-left" aria-hidden="true">🌸</span>
+            <span class="card-deco-heart top-right" aria-hidden="true">✨</span>
+
+            <!-- Mascot: Cute Bear Holding a Rose -->
+            <div class="mascot-section">
+              <div class="mascot-container is-asking" id="mascotAskingContainer">
+                <svg
+                  viewBox="0 0 200 200"
+                  class="mascot-svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-label="Cute bear holding a rose"
+                  role="img"
+                >
+                  <defs>
+                    <linearGradient id="bearFurAsking" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FDE2D2"></stop>
+                      <stop offset="100%" stop-color="#ECC6B0"></stop>
+                    </linearGradient>
+                    <linearGradient id="roseGradAsking" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FF4D6D"></stop>
+                      <stop offset="100%" stop-color="#C9184A"></stop>
+                    </linearGradient>
+                    <filter id="softGlowAsking" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+                      <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+                    </filter>
+                  </defs>
+
+                  <!-- Mascot Ambient Sparkles -->
+                  <g class="mascot-ambient">
+                    <text x="35" y="55" class="sparkle-float sparkle-1">✨</text>
+                    <text x="145" y="60" class="sparkle-float sparkle-2">💗</text>
+                  </g>
+
+                  <!-- Ground Shadow -->
+                  <ellipse cx="100" cy="180" rx="48" ry="12" fill="rgba(215, 130, 160, 0.18)"></ellipse>
+
+                  <!-- Bear Body Group -->
+                  <g class="bear-body-group">
+                    <!-- Ears -->
+                    <circle cx="60" cy="68" r="22" fill="url(#bearFurAsking)"></circle>
+                    <circle cx="60" cy="68" r="13" fill="#F8B4C0" opacity="0.8"></circle>
+                    <circle cx="140" cy="68" r="22" fill="url(#bearFurAsking)"></circle>
+                    <circle cx="140" cy="68" r="13" fill="#F8B4C0" opacity="0.8"></circle>
+
+                    <!-- Body & Tummy -->
+                    <ellipse cx="100" cy="138" rx="46" ry="40" fill="url(#bearFurAsking)"></ellipse>
+                    <ellipse cx="100" cy="142" rx="30" ry="24" fill="#FFF5EC"></ellipse>
+
+                    <!-- Feet -->
+                    <ellipse cx="72" cy="172" rx="15" ry="10" fill="url(#bearFurAsking)"></ellipse>
+                    <circle cx="72" cy="172" r="6" fill="#F8B4C0" opacity="0.75"></circle>
+                    <ellipse cx="128" cy="172" rx="15" ry="10" fill="url(#bearFurAsking)"></ellipse>
+                    <circle cx="128" cy="172" r="6" fill="#F8B4C0" opacity="0.75"></circle>
+
+                    <!-- Head -->
+                    <circle cx="100" cy="98" r="44" fill="url(#bearFurAsking)"></circle>
+
+                    <!-- Snout & Nose -->
+                    <ellipse cx="100" cy="108" rx="19" ry="15" fill="#FFF5EC"></ellipse>
+                    <path d="M 94 103 C 94 100, 106 100, 106 103 C 106 107, 100 110, 100 110 C 100 110, 94 107, 94 103 Z" fill="#5C3D2E"></path>
+
+                    <!-- Shy Sweet Mouth -->
+                    <path d="M 93 112 Q 100 118 107 112" fill="none" stroke="#5C3D2E" stroke-width="2.5" stroke-linecap="round"></path>
+
+                    <!-- Rosy Cheeks -->
+                    <ellipse cx="72" cy="110" rx="9" ry="6" fill="#FF85A1" opacity="0.55" class="blush-cheek"></ellipse>
+                    <ellipse cx="128" cy="110" rx="9" ry="6" fill="#FF85A1" opacity="0.55" class="blush-cheek"></ellipse>
+
+                    <!-- Starry Pleading Eyes with Highlights -->
+                    <g class="bear-asking-eyes">
+                      <circle cx="83" cy="95" r="7.5" fill="#3D201A"></circle>
+                      <circle cx="81" cy="92.5" r="3" fill="#FFFFFF"></circle>
+                      <circle cx="85.5" cy="97" r="1.5" fill="#FFFFFF"></circle>
+                      <circle cx="117" cy="95" r="7.5" fill="#3D201A"></circle>
+                      <circle cx="115" cy="92.5" r="3" fill="#FFFFFF"></circle>
+                      <circle cx="119.5" cy="97" r="1.5" fill="#FFFFFF"></circle>
+                    </g>
+
+                    <!-- Bear Arms Holding Rose -->
+                    <g class="asking-arms">
+                      <ellipse cx="76" cy="138" rx="11" ry="9" fill="url(#bearFurAsking)"></ellipse>
+                      <!-- Stem -->
+                      <path d="M 100 152 Q 112 142 118 124" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round"></path>
+                      <!-- Leaf -->
+                      <path d="M 107 142 Q 118 140 115 148 Q 106 148 107 142 Z" fill="#74C69D"></path>
+                      <!-- Rose Petals -->
+                      <g transform="translate(120, 118)" class="mascot-rose">
+                        <circle cx="0" cy="0" r="11" fill="url(#roseGradAsking)"></circle>
+                        <path d="M -7 -4 Q 0 -12 7 -4 Q 6 7 -7 -4 Z" fill="#FF758F"></path>
+                        <circle cx="0" cy="-1" r="5" fill="#FFE5EC" opacity="0.8"></circle>
+                        <circle cx="0" cy="0" r="15" fill="none" stroke="#FF85A1" stroke-width="1" stroke-dasharray="3 3" opacity="0.6" class="rose-aura"></circle>
+                      </g>
+                      <!-- Right paw -->
+                      <ellipse cx="108" cy="140" rx="11" ry="9" fill="url(#bearFurAsking)"></ellipse>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Header Block Greeting -->
+            <div class="card-header-block">
+              <div class="greeting-wrapper">
+                <h2 class="greeting-text">
+                  Hey, <span id="recipientNameDisplay" class="highlight-name">Pretty Girl</span>! 💗
+                </h2>
+                <button
+                  type="button"
+                  id="editNameBtn"
+                  class="edit-name-btn"
+                  title="Change name"
+                  aria-label="Customize name"
+                >
+                  ✏️
+                </button>
+              </div>
+              <p class="sub-intro">I have something to ask you...</p>
+            </div>
+
+            <!-- Main Question Block -->
+            <div class="main-question-block">
+              <h1 class="romantic-question" id="romanticQuestionHeading">
+                Will you go on a date with me? <span class="question-emoji">🥹💕</span>
+              </h1>
+              <p class="romantic-subtitle">
+                I promise good vibes, lots of laughter, and maybe a little bit of blushing. 🌷
+              </p>
+            </div>
+
+            <!-- Buttons Playground (Yes & Playfully Evasive No) -->
+            <div class="buttons-playground" id="buttonsPlayground">
+              <div class="buttons-container">
+                <!-- YES BUTTON -->
+                <button
+                  type="button"
+                  id="yesBtn"
+                  class="btn btn-yes"
+                  aria-label="Yes, I would love to go on a date"
+                >
+                  <span class="btn-yes-glow"></span>
+                  <svg class="btn-icon heart-pulse" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                  </svg>
+                  <span class="btn-text">Yes! 💖</span>
+                  <svg class="btn-icon-sparkle" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path>
+                  </svg>
+                </button>
+
+                <!-- NO BUTTON (Dodging Button) -->
+                <div class="no-btn-anchor" id="noBtnAnchor">
+                  <button
+                    type="button"
+                    id="noBtn"
+                    class="btn btn-no"
+                    tabindex="-1"
+                    aria-label="No option (playfully evasive)"
+                  >
+                    <span id="noBtnText" class="no-text">No 🙈</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Playful Dodge Notice Pill -->
+              <div class="dodge-notice-pill hidden" id="dodgeNoticePill" role="status">
+                <span class="notice-icon">💬</span>
+                <span id="dodgeNoticeText">Hehe, that button is a bit slippery! 😜</span>
+              </div>
+            </div>
+
+            <!-- Card Footer Note -->
+            <div class="card-footer-note">
+              <span>Handcrafted with all my heart 💌</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- ==========================================
+             SCREEN 2: CELEBRATION & SUCCESS CARD
+             ========================================== -->
+        <section class="card-outer-wrapper success-animation-enter hidden" id="successCardWrapper" aria-labelledby="successTitleHeading">
+          <article class="romantic-card success-card" id="successCard">
+            <!-- Decorative Corner Emojis -->
+            <span class="card-deco-heart top-left" aria-hidden="true">✨</span>
+            <span class="card-deco-heart top-right" aria-hidden="true">💖</span>
+
+            <!-- Big Beating Heart Emblem -->
+            <div class="success-heart-emblem-wrap">
+              <div class="glowing-heart-pulse">
+                <svg viewBox="0 0 100 100" class="success-giant-heart" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="heartGradientSuccess" cx="50%" cy="40%" r="50%">
+                      <stop offset="0%" stop-color="#FF4D6D"></stop>
+                      <stop offset="60%" stop-color="#FF758F"></stop>
+                      <stop offset="100%" stop-color="#C9184A"></stop>
+                    </radialGradient>
+                  </defs>
+                  <path d="M 50,88 C 20,68 4,50 4,28 C 4,12 16,4 30,4 C 39,4 46,9 50,16 C 54,9 61,4 70,4 C 84,4 96,12 96,28 C 96,50 80,68 50,88 Z" fill="url(#heartGradientSuccess)"></path>
+                  <path d="M 22,22 C 24,14 30,10 38,10" fill="none" stroke="#FFE5EC" stroke-width="4" stroke-linecap="round" opacity="0.7"></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Celebrating Mascot: Bear with Crown & Bouquet -->
+            <div class="mascot-section">
+              <div class="mascot-container is-happy" id="mascotSuccessContainer">
+                <svg
+                  viewBox="0 0 200 200"
+                  class="mascot-svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-label="Cute happy bear celebrating with a crown and flowers"
+                  role="img"
+                >
+                  <defs>
+                    <linearGradient id="bearFurSuccess" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FDE2D2"></stop>
+                      <stop offset="100%" stop-color="#ECC6B0"></stop>
+                    </linearGradient>
+                    <linearGradient id="roseGradSuccess" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FF4D6D"></stop>
+                      <stop offset="100%" stop-color="#C9184A"></stop>
+                    </linearGradient>
+                    <linearGradient id="goldGradSuccess" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFE066"></stop>
+                      <stop offset="100%" stop-color="#F59F00"></stop>
+                    </linearGradient>
+                    <filter id="softGlowSuccess" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+                      <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+                    </filter>
+                  </defs>
+
+                  <!-- Mascot Ambient Confetti Emojis -->
+                  <g class="mascot-ambient">
+                    <text x="32" y="45" class="sparkle-float sparkle-1">💖</text>
+                    <text x="148" y="40" class="sparkle-float sparkle-2">✨</text>
+                    <text x="25" y="110" class="sparkle-float sparkle-3">🌸</text>
+                    <text x="155" y="115" class="sparkle-float sparkle-4">💕</text>
+                  </g>
+
+                  <!-- Ground Shadow -->
+                  <ellipse cx="100" cy="180" rx="48" ry="12" fill="rgba(215, 130, 160, 0.18)"></ellipse>
+
+                  <!-- Bear Main Group -->
+                  <g class="bear-body-group">
+                    <!-- Ears -->
+                    <circle cx="60" cy="68" r="22" fill="url(#bearFurSuccess)"></circle>
+                    <circle cx="60" cy="68" r="13" fill="#F8B4C0" opacity="0.8"></circle>
+                    <circle cx="140" cy="68" r="22" fill="url(#bearFurSuccess)"></circle>
+                    <circle cx="140" cy="68" r="13" fill="#F8B4C0" opacity="0.8"></circle>
+
+                    <!-- Golden Crown -->
+                    <g class="bear-crown" transform="translate(100, 44)">
+                      <path d="M -22 0 L -15 -14 L -6 -3 L 0 -18 L 6 -3 L 15 -14 L 22 0 Z" fill="url(#goldGradSuccess)" filter="url(#softGlowSuccess)"></path>
+                      <circle cx="0" cy="-18" r="3" fill="#FF4D6D"></circle>
+                      <circle cx="-15" cy="-14" r="2.5" fill="#C084FC"></circle>
+                      <circle cx="15" cy="-14" r="2.5" fill="#38BDF8"></circle>
+                    </g>
+
+                    <!-- Body & Tummy -->
+                    <ellipse cx="100" cy="138" rx="46" ry="40" fill="url(#bearFurSuccess)"></ellipse>
+                    <ellipse cx="100" cy="142" rx="30" ry="24" fill="#FFF5EC"></ellipse>
+
+                    <!-- Feet -->
+                    <ellipse cx="72" cy="172" rx="15" ry="10" fill="url(#bearFurSuccess)"></ellipse>
+                    <circle cx="72" cy="172" r="6" fill="#F8B4C0" opacity="0.75"></circle>
+                    <ellipse cx="128" cy="172" rx="15" ry="10" fill="url(#bearFurSuccess)"></ellipse>
+                    <circle cx="128" cy="172" r="6" fill="#F8B4C0" opacity="0.75"></circle>
+
+                    <!-- Head -->
+                    <circle cx="100" cy="98" r="44" fill="url(#bearFurSuccess)"></circle>
+
+                    <!-- Snout & Nose -->
+                    <ellipse cx="100" cy="108" rx="19" ry="15" fill="#FFF5EC"></ellipse>
+                    <path d="M 94 103 C 94 100, 106 100, 106 103 C 106 107, 100 110, 100 110 C 100 110, 94 107, 94 103 Z" fill="#5C3D2E"></path>
+
+                    <!-- Joyous Open Smile -->
+                    <g>
+                      <path d="M 92 112 Q 100 124 108 112" fill="#FF6584" stroke="#5C3D2E" stroke-width="2.5" stroke-linecap="round"></path>
+                      <path d="M 95 117 Q 100 123 105 117" fill="#FF8DA1"></path>
+                    </g>
+
+                    <!-- Rosy Cheeks -->
+                    <ellipse cx="72" cy="110" rx="9" ry="6" fill="#FF85A1" opacity="0.55" class="blush-cheek"></ellipse>
+                    <ellipse cx="128" cy="110" rx="9" ry="6" fill="#FF85A1" opacity="0.55" class="blush-cheek"></ellipse>
+
+                    <!-- Closed Happy Crescent Eyes -->
+                    <g class="bear-happy-eyes">
+                      <path d="M 76 96 Q 84 88 92 96" fill="none" stroke="#4A2835" stroke-width="3.5" stroke-linecap="round"></path>
+                      <path d="M 108 96 Q 116 88 124 96" fill="none" stroke="#4A2835" stroke-width="3.5" stroke-linecap="round"></path>
+                    </g>
+
+                    <!-- Celebration Arms Holding Rose Bouquet -->
+                    <g class="celebration-arms">
+                      <ellipse cx="58" cy="120" rx="12" ry="10" transform="rotate(-30 58 120)" fill="url(#bearFurSuccess)"></ellipse>
+                      <ellipse cx="142" cy="120" rx="12" ry="10" transform="rotate(30 142 120)" fill="url(#bearFurSuccess)"></ellipse>
+
+                      <g transform="translate(100, 142)" class="mascot-bouquet">
+                        <circle cx="-10" cy="-6" r="10" fill="url(#roseGradSuccess)"></circle>
+                        <circle cx="10" cy="-6" r="10" fill="url(#roseGradSuccess)"></circle>
+                        <circle cx="0" cy="-14" r="11" fill="#FF4D6D" filter="url(#softGlowSuccess)"></circle>
+                        <path d="M -16 6 Q 0 16 16 6" fill="#F8B4C0" stroke="#FF85A1" stroke-width="2"></path>
+                        <text x="0" y="-10" text-anchor="middle" font-size="12" fill="#FFFFFF">💖</text>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Success Header Message -->
+            <div class="success-message-block">
+              <h1 class="success-title" id="successTitleHeading">
+                YAYYYYY! <span class="title-emoji">🥹💗</span>
+              </h1>
+              <p class="success-tagline">
+                You just made me the happiest person ever! 💕
+              </p>
+              <p class="success-body-text">
+                I can't wait to spend some beautiful moments with you. 🌷✨
+              </p>
+              <div class="sealed-date-banner">
+                <p class="sealed-text">
+                  So... it's a date? <span class="sealed-emoji">🥰💖</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Custom Date Planner & WhatsApp Box -->
+            <div class="custom-date-planner-box">
+              <div class="planner-header">
+                <div class="planner-title-wrap">
+                  <span class="planner-emoji">💌</span>
+                  <div>
+                    <h3 class="planner-title">Describe Your Dream Date</h3>
+                    <p class="planner-subtitle">Tell him what kind of date you want to go on!</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Inspiration Chips -->
+              <div class="quick-inspirations-wrap">
+                <span class="inspiration-label">Quick ideas:</span>
+                <div class="inspiration-chips" id="inspirationChipsContainer">
+                  <button type="button" class="chip-btn" data-idea="🌅 Sunset walk & boba">
+                    <span>🌅 Sunset walk & boba</span>
+                  </button>
+                  <button type="button" class="chip-btn" data-idea="🍝 Candlelight dinner & gelato">
+                    <span>🍝 Candlelight dinner & gelato</span>
+                  </button>
+                  <button type="button" class="chip-btn" data-idea="☕ Cozy cafe & book browsing">
+                    <span>☕ Cozy cafe & book browsing</span>
+                  </button>
+                  <button type="button" class="chip-btn" data-idea="🎬 Movie marathon & blanket fort">
+                    <span>🎬 Movie marathon & blanket fort</span>
+                  </button>
+                  <button type="button" class="chip-btn" data-idea="🎡 Arcade games & street food">
+                    <span>🎡 Arcade games & street food</span>
+                  </button>
+                  <button type="button" class="chip-btn" data-idea="✨ Late night drive & stargazing">
+                    <span>✨ Late night drive & stargazing</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Textarea for Custom Date Idea -->
+              <div class="textarea-container">
+                <textarea
+                  id="customDateTextarea"
+                  class="custom-date-textarea"
+                  rows="3"
+                  maxlength="280"
+                  placeholder="Write your dream date idea here... (e.g. cozy dinner, sunset walk, pottery class, stargazing, amusement park, or anything you'd love! 🌸)"
+                ></textarea>
+                <span id="charCounter" class="char-counter">0/280</span>
+              </div>
+
+              <!-- WhatsApp Message Live Preview -->
+              <div class="whatsapp-preview-box">
+                <div class="whatsapp-preview-header">
+                  <svg class="text-emerald" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path>
+                  </svg>
+                  <span>WhatsApp message preview to +91 84458 48985:</span>
+                </div>
+                <p class="whatsapp-preview-content" id="whatsappPreviewContent"></p>
+              </div>
+
+              <!-- WhatsApp Send Button -->
+              <button
+                type="button"
+                id="whatsappSendBtn"
+                class="btn btn-whatsapp-confirm"
+                aria-label="Send custom date wish on WhatsApp"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m22 2-7 20-4-9-9-4Z"></path>
+                  <path d="M22 2 11 13"></path>
+                </svg>
+                <span id="whatsappBtnText">Send My Date Wish on WhatsApp! 💬✨</span>
+              </button>
+            </div>
+
+            <!-- "You made my day! 💌" Button -->
+            <div class="success-actions-block">
+              <button
+                type="button"
+                id="madeMyDayBtn"
+                class="btn btn-made-my-day"
+                aria-label="You made my day! Trigger more love confetti"
+              >
+                <svg class="icon-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path>
+                </svg>
+                <span>You made my day! 💌</span>
+                <svg class="icon-pulse" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                </svg>
+              </button>
+
+              <div class="reaction-bubble-pill hidden" id="reactionBubblePill" role="status">
+                <span id="reactionBubbleText"></span>
+              </div>
+            </div>
+
+            <!-- Confirmation Badge & Copy Promise -->
+            <div class="confirmation-badge-wrapper">
+              <div class="confirmation-badge">
+                <svg class="badge-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5.8 11.3 2 22l10.7-3.79"></path>
+                  <path d="M4 3h.01"></path>
+                  <path d="M22 8h.01"></path>
+                  <path d="M15 2h.01"></path>
+                  <path d="M22 20h.01"></path>
+                  <path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12v0c.1.86-.57 1.63-1.45 1.63h-.38e-1c-.86 0-1.6.65-1.7 1.51v0a2.9 2.9 0 0 0 1.96 3.12L22 13"></path>
+                  <path d="m11 13-1.74 2.2a2.9 2.9 0 0 0-.46 3.65v0c.48.74.22 1.73-.55 2.13h0c-.75.39-1.12 1.28-.88 2.11L8 25"></path>
+                </svg>
+                <div class="badge-details">
+                  <strong>Official Date Agreement 📜💕</strong>
+                  <span>Status: Happily Confirmed!</span>
+                </div>
+                <button
+                  type="button"
+                  id="copyPromiseBtn"
+                  class="btn-copy-promise"
+                  title="Copy sweet message"
+                  aria-label="Copy confirmation agreement"
+                >
+                  <svg id="copyPromiseIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                  </svg>
+                  <span id="copyPromiseText">Copy text</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Replay Option -->
+            <div class="replay-wrapper">
+              <button type="button" id="replayBtn" class="btn-replay">
+                🔄 See question again
+              </button>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <!-- App Footer -->
+      <footer class="app-footer-credit" role="contentinfo">
+        <span>Made with infinite love & butterflies in the stomach 💕</span>
+      </footer>
+
+      <!-- Modal to Personalize Name -->
+      <div class="modal-backdrop hidden" id="nameModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-card">
+          <span class="modal-emoji" aria-hidden="true">💌</span>
+          <h2 id="modalTitle" class="modal-title">Personalize Your Date Ask</h2>
+          <p class="modal-subtitle">Enter her name or nickname to make this experience uniquely hers:</p>
+
+          <form id="nameForm" class="modal-form">
+            <input
+              type="text"
+              id="nameInput"
+              class="modal-input"
+              maxlength="30"
+              placeholder="e.g. Sophia, Cutie, Maya..."
+              autocomplete="off"
+            />
+            <div class="modal-actions">
+              <button type="button" id="cancelNameBtn" class="btn-modal-cancel">
+                Cancel
+              </button>
+              <button type="submit" id="saveNameBtn" class="btn-modal-save">
+                Save & Apply 💖
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modular External JavaScript Logic -->
+    <script src="script.js"></script>
+  </body>
+</html>
