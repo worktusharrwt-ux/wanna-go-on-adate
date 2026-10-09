@@ -187,6 +187,7 @@ a {
   animation: floatUp var(--heart-duration, 12s) infinite linear,
              swaySide var(--heart-sway, 3s) infinite ease-in-out alternate;
   animation-delay: var(--heart-delay, 0s), var(--heart-delay, 0s);
+  -webkit-user-select: none;
   user-select: none;
   filter: drop-shadow(0 2px 6px rgba(255, 117, 143, 0.2));
 }
@@ -255,6 +256,7 @@ a {
   pointer-events: none;
   transform: translate(-50%, -50%);
   animation: cursorSparkleAnim 0.75s forwards cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-user-select: none;
   user-select: none;
   will-change: transform, opacity;
 }
@@ -293,8 +295,8 @@ a {
   gap: 0.45rem;
   padding: 0.45rem 0.95rem;
   background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: var(--pill-radius);
   color: var(--color-text-secondary);
@@ -366,8 +368,8 @@ a {
   position: relative;
   width: 100%;
   background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(24px) saturate(190%);
   -webkit-backdrop-filter: blur(24px) saturate(190%);
+  backdrop-filter: blur(24px) saturate(190%);
   border: 1.5px solid rgba(255, 255, 255, 0.92);
   border-radius: var(--card-radius);
   box-shadow: var(--shadow-romantic-card);
@@ -569,7 +571,6 @@ a {
   font-weight: 700;
   color: var(--color-text-primary);
   margin-bottom: 0.75rem;
-  text-wrap: balance;
   text-shadow: 0 2px 10px rgba(255, 117, 143, 0.12);
 }
 
@@ -625,6 +626,7 @@ a {
   font-weight: 600;
   border-radius: var(--pill-radius);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-user-select: none;
   user-select: none;
   cursor: pointer;
   white-space: nowrap;
@@ -696,8 +698,8 @@ a {
 
 .btn-no {
   background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   color: var(--color-text-secondary);
   border: 1.5px solid var(--color-blush-200);
   box-shadow: 0 4px 14px rgba(244, 114, 182, 0.12);
@@ -1190,8 +1192,8 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(56, 30, 40, 0.35);
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
