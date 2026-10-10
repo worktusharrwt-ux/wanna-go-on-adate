@@ -99,7 +99,7 @@ a {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 1.5rem 1rem;
   overflow-x: hidden;
@@ -346,6 +346,7 @@ a {
    -------------------------------------------------------------------------- */
 .main-content-viewport {
   width: 100%;
+  flex: 1 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1358,6 +1359,10 @@ a {
     font-size: 1rem;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-yes {
+    transform: scale(min(var(--yes-scale, 1), 1.18));
   }
 
   .btn-no {

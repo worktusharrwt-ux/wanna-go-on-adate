@@ -1,3 +1,5 @@
+import confetti from 'canvas-confetti';
+
 /**
  * ============================================================================
  * DATE SIMULATOR - INTERACTIVE JAVASCRIPT ENGINE
@@ -271,9 +273,10 @@
   // CONFETTI CELEBRATION ENGINE
   // --------------------------------------------------------------------------
   function initConfettiShape() {
-    if (typeof window.confetti === 'function' && typeof window.confetti.shapeFromPath === 'function') {
+    const fn = typeof confetti === 'function' ? confetti : window.confetti;
+    if (fn && typeof fn.shapeFromPath === 'function') {
       try {
-        heartConfettiShape = window.confetti.shapeFromPath({
+        heartConfettiShape = fn.shapeFromPath({
           path: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z',
         });
       } catch (e) {
@@ -283,9 +286,10 @@
   }
 
   function triggerConfetti(options) {
-    if (typeof window.confetti === 'function') {
+    const fn = typeof confetti === 'function' ? confetti : window.confetti;
+    if (typeof fn === 'function') {
       const shapes = heartConfettiShape ? [heartConfettiShape, 'circle'] : ['circle'];
-      window.confetti({
+      fn({
         shapes,
         colors: ROMANTIC_COLORS,
         ...options,
@@ -466,7 +470,18 @@
   // --------------------------------------------------------------------------
   // NO-BUTTON PLAYFUL DODGE LOGIC
   // --------------------------------------------------------------------------
+  let lastDodgeTimestamp = 0;
+
   function handleNoDodge(e) {
+    const now = Date.now();
+    if (now - lastDodgeTimestamp < 320) {
+      if (e && e.cancelable) {
+        e.preventDefault();
+      }
+      return;
+    }
+    lastDodgeTimestamp = now;
+
     if (e) {
       if (e.cancelable) {
         e.preventDefault();
@@ -854,15 +869,14 @@
 
     const noBtn = document.getElementById('noBtn');
     if (noBtn) {
+      // Desktop hover evasion
       noBtn.addEventListener('mouseenter', handleNoDodge);
-      noBtn.addEventListener('mousemove', handleNoDodge);
-      noBtn.addEventListener('touchstart', handleNoDodge, { passive: false });
-      noBtn.addEventListener('pointerdown', (e) => {
-        if (e.pointerType === 'touch' || e.pointerType === 'mouse') {
-          handleNoDodge(e);
-        }
+      // Touch & mobile pointer evasion (unified pointerdown handles touch & pen cleanly)
+      noBtn.addEventListener('pointerdown', handleNoDodge);
+      noBtn.addEventListener('click', (e) => {
+        if (e.cancelable) e.preventDefault();
+        handleNoDodge(e);
       });
-      noBtn.addEventListener('click', handleNoDodge);
     }
 
     // Success Screen Actions
