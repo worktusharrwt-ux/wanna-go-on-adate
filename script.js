@@ -468,7 +468,9 @@
   // --------------------------------------------------------------------------
   function handleNoDodge(e) {
     if (e) {
-      e.preventDefault();
+      if (e.cancelable) {
+        e.preventDefault();
+      }
       e.stopPropagation();
     }
 
@@ -507,7 +509,7 @@
       noBtnText.textContent = NO_PHRASES[phraseIndex];
     }
 
-    // Calculate evasion coordinate
+    // Calculate evasion coordinate bounded cleanly inside card on mobile and desktop
     const container = document.getElementById('questionCard');
     const noBtn = document.getElementById('noBtn');
     const noAnchor = document.getElementById('noBtnAnchor');
@@ -515,24 +517,32 @@
     if (!container || !noBtn || !noAnchor) return;
 
     const containerRect = container.getBoundingClientRect();
-    const btnRect = noBtn.getBoundingClientRect();
+    const anchorRect = noAnchor.getBoundingClientRect();
 
-    const maxDeltaX = Math.min(150, Math.floor(containerRect.width / 2 - btnRect.width / 2 - 16));
-    const maxDeltaY = 65;
+    // Available space to left and right of the anchor inside the card padding
+    const padding = 16;
+    const maxLeft = Math.max(25, (anchorRect.left - containerRect.left) - padding);
+    const maxRight = Math.max(25, (containerRect.right - anchorRect.right) - padding);
+    const maxUp = 55;
+    const maxDown = 55;
 
     let targetX = 0;
     let targetY = 0;
     let attempts = 0;
 
-    while (attempts < 12) {
+    while (attempts < 15) {
       attempts++;
-      const rawX = (Math.random() * 2 - 1) * maxDeltaX;
-      const rawY = (Math.random() * 2 - 1) * maxDeltaY;
+      const dirX = Math.random() < 0.5 ? -1 : 1;
+      const rawX = dirX === -1
+        ? -(Math.random() * maxLeft)
+        : (Math.random() * maxRight);
+      const rawY = (Math.random() * 2 - 1) * (rawX < 0 ? maxUp : maxDown);
 
       const dist = Math.hypot(rawX - noPosition.x, rawY - noPosition.y);
-      if (dist < 55) continue;
+      if (dist < 40) continue;
 
-      if (rawX < -80 && Math.abs(rawY) < 30) continue;
+      // Avoid directly covering Yes button center
+      if (rawX < -70 && Math.abs(rawY) < 25) continue;
 
       targetX = Math.round(rawX);
       targetY = Math.round(rawY);
