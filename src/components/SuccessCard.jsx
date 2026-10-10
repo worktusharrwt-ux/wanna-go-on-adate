@@ -22,7 +22,7 @@ const QUICK_INSPIRATIONS = [
   { emoji: '🌅', text: 'sunset ya sunrise dekhne chalte h' },
 ];
 
-export default function SuccessCard({ recipientName = 'Pretty Girl', onReplay }) {
+export default function SuccessCard({ recipientName = 'Pretty Girl', onReplay, senderName = 'Tushar' }) {
   const [customDatePlan, setCustomDatePlan] = useState('🥟 momo date? or whatever you like');
   const [copied, setCopied] = useState(false);
   const [reactionIndex, setReactionIndex] = useState(0);
@@ -176,7 +176,7 @@ export default function SuccessCard({ recipientName = 'Pretty Girl', onReplay })
           <div className="whatsapp-preview-box">
             <div className="whatsapp-preview-header">
               <MessageCircle size={15} className="text-emerald" />
-              <span>WhatsApp message preview to {DISPLAY_PHONE}:</span>
+              <span>WhatsApp message preview to {senderName}:</span>
             </div>
             <p className="whatsapp-preview-content">
               💬 "Hey! 💕 I said YES on your date proposal website! 🥰<br />
@@ -190,10 +190,10 @@ export default function SuccessCard({ recipientName = 'Pretty Girl', onReplay })
           <button
             className="btn btn-whatsapp-confirm"
             onClick={handleSendCustomWhatsApp}
-            aria-label="Send custom date wish on WhatsApp"
+            aria-label={`Send custom date wish to ${senderName} on WhatsApp`}
           >
             <Send size={18} />
-            <span>{hasSentWhatsApp ? 'Update & Resend on WhatsApp 💬' : 'Send My Date Wish on WhatsApp! 💬✨'}</span>
+            <span>{hasSentWhatsApp ? `Update & Resend to ${senderName} on WhatsApp 💬` : `Send My Date Wish to ${senderName} on WhatsApp! 💬✨`}</span>
           </button>
         </div>
 

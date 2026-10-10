@@ -11,6 +11,7 @@ import './App.css';
 export default function App() {
   const [hasSaidYes, setHasSaidYes] = useState(false);
   const [recipientName, setRecipientName] = useState('Pretty Girl');
+  const [senderName, setSenderName] = useState('Tushar');
   const [isNameModalOpen, setIsNameModalOpen] = useState(false);
 
   // Initialize background music engine & read name parameter from URL
@@ -22,6 +23,10 @@ export default function App() {
       const name = params.get('name');
       if (name && name.trim()) {
         setRecipientName(name.trim());
+      }
+      const from = params.get('from') || params.get('sender');
+      if (from && from.trim()) {
+        setSenderName(from.trim());
       }
     } catch (e) {
       // Fallback
@@ -67,6 +72,7 @@ export default function App() {
         ) : (
           <SuccessCard
             recipientName={recipientName}
+            senderName={senderName}
             onReplay={handleReplay}
           />
         )}

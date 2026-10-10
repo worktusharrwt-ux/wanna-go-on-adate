@@ -13,7 +13,7 @@
   // CONSTANTS & CONFIGURATION
   // --------------------------------------------------------------------------
   const WHATSAPP_PHONE = '918445848985';
-  const DISPLAY_PHONE = '+91 84458 48985';
+  let senderName = 'Tushar';
   const STORAGE_KEY = 'date_sim_sound_enabled';
   const DEFAULT_VOLUME = 0.18; // 18% gentle volume
 
@@ -669,7 +669,7 @@
     hasSentWhatsApp = true;
     const btnText = document.getElementById('whatsappBtnText');
     if (btnText) {
-      btnText.textContent = 'Update & Resend on WhatsApp 💬';
+      btnText.textContent = `Update & Resend to ${senderName} on WhatsApp 💬`;
     }
   }
 
@@ -913,14 +913,27 @@
   // INITIALIZATION ON DOM READY
   // --------------------------------------------------------------------------
   function init() {
-    // Read recipient name from URL parameters if available
+    // Read recipient and sender names from URL parameters if available
     try {
       const params = new URLSearchParams(window.location.search);
       const nameParam = params.get('name');
       if (nameParam && nameParam.trim()) {
         recipientName = nameParam.trim();
       }
+      const fromParam = params.get('from') || params.get('sender');
+      if (fromParam && fromParam.trim()) {
+        senderName = fromParam.trim();
+      }
     } catch (e) {}
+
+    const previewHeader = document.getElementById('whatsappPreviewHeaderTitle');
+    if (previewHeader) {
+      previewHeader.textContent = `WhatsApp message preview to ${senderName}:`;
+    }
+    const whatsappBtn = document.getElementById('whatsappBtnText');
+    if (whatsappBtn) {
+      whatsappBtn.textContent = `Send My Date Wish to ${senderName} on WhatsApp! 💬✨`;
+    }
 
     setRecipient(recipientName);
     initAudioEngine();
