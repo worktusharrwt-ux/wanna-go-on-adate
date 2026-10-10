@@ -15,16 +15,15 @@ const SWEET_REACTIONS = [
 ];
 
 const QUICK_INSPIRATIONS = [
-  { emoji: '🌅', text: 'Sunset walk & boba' },
-  { emoji: '🍝', text: 'Candlelight dinner & gelato' },
-  { emoji: '☕', text: 'Cozy cafe & book browsing' },
-  { emoji: '🎬', text: 'Movie marathon & blanket fort' },
-  { emoji: '🎡', text: 'Arcade games & street food' },
-  { emoji: '✨', text: 'Late night drive & stargazing' },
+  { emoji: '🥟', text: 'momo date?' },
+  { emoji: '🍻', text: '1-1 beer ho jaye ?' },
+  { emoji: '🎬', text: "let's go out for a movie" },
+  { emoji: '🚶', text: 'walk pe chlte h' },
+  { emoji: '🌅', text: 'sunset ya sunrise dekhne chalte h' },
 ];
 
 export default function SuccessCard({ recipientName = 'Pretty Girl', onReplay }) {
-  const [customDatePlan, setCustomDatePlan] = useState('Sunset walk, cute boba drinks, and lots of laughter! 🌅🧋');
+  const [customDatePlan, setCustomDatePlan] = useState('🥟 momo date?');
   const [copied, setCopied] = useState(false);
   const [reactionIndex, setReactionIndex] = useState(0);
   const [reactionText, setReactionText] = useState('');

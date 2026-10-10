@@ -685,7 +685,7 @@
 
   function handleCopyPromise() {
     const textarea = document.getElementById('customDateTextarea');
-    const plan = textarea ? textarea.value.trim() : 'Sunset walk, cute boba drinks, and lots of laughter! 🌅🧋';
+    const plan = textarea ? textarea.value.trim() : '🥟 momo date? ✨';
     const text = `Officially sealed with a YES! 🥰 My date wish: "${plan}"! 💖✨`;
 
     if (navigator.clipboard) {
@@ -858,7 +858,7 @@
     // Success Screen Actions
     const customTextarea = document.getElementById('customDateTextarea');
     if (customTextarea) {
-      customTextarea.value = 'Sunset walk, cute boba drinks, and lots of laughter! 🌅🧋';
+      customTextarea.value = '🥟 momo date?';
       customTextarea.addEventListener('input', updateWhatsAppPreview);
       updateWhatsAppPreview();
     }
