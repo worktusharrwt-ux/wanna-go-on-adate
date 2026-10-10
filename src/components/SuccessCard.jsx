@@ -15,7 +15,7 @@ const SWEET_REACTIONS = [
 ];
 
 const QUICK_INSPIRATIONS = [
-  { emoji: '🥟', text: 'momo date?' },
+  { emoji: '🥟', text: 'momo date? or whatever you like' },
   { emoji: '🍻', text: '1-1 beer ho jaye ?' },
   { emoji: '🎬', text: "let's go out for a movie" },
   { emoji: '🚶', text: 'walk pe chlte h' },
@@ -23,7 +23,7 @@ const QUICK_INSPIRATIONS = [
 ];
 
 export default function SuccessCard({ recipientName = 'Pretty Girl', onReplay }) {
-  const [customDatePlan, setCustomDatePlan] = useState('🥟 momo date?');
+  const [customDatePlan, setCustomDatePlan] = useState('🥟 momo date? or whatever you like');
   const [copied, setCopied] = useState(false);
   const [reactionIndex, setReactionIndex] = useState(0);
   const [reactionText, setReactionText] = useState('');
